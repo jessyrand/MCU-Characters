@@ -60,7 +60,7 @@ app.post('/characters', (req, res) => {
             const newCharacter = {id, name, realName, universe}
             characters.push(newCharacter);
 
-            fs.writeFile('./characters.json', JSON.stringify({ characters }), (err) => {
+            fs.writeFile('./characters.json', JSON.stringify({ characters }, null, 2), (err) => {
                 if (err) {
                     res.send(err);
                 }
@@ -102,7 +102,7 @@ app.put('/characters/:id', (req, res) => {
 
             characters[characterIndex] = {id, name, realName, universe};
 
-            fs.writeFile('./characters.json', JSON.stringify({ characters }), (err) => {
+            fs.writeFile('./characters.json', JSON.stringify({ characters }, null, 2), (err) => {
                 if (err) {
                     res.send(err);
                 }
@@ -133,7 +133,7 @@ app.delete('/characters/:id', (req, res) => {
 
             const [deletedCharacter] = characters.splice(characterIndex, 1);
 
-            fs.writeFile('./characters.json', JSON.stringify({ characters }), (err) => {
+            fs.writeFile('./characters.json', JSON.stringify({ characters }, null, 2), (err) => {
                 if (err) {
                     res.send(err);
                 }
