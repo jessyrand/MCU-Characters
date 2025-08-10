@@ -21,6 +21,20 @@ app.get('/characters', (req, res) => {
     })
 })
 
+app.get('/characters/:id', (req, res) => {
+    fs.readFile('./characters.json', 'utf8', (err, data) => {
+        if (err) {
+            res.send(err);
+        }
+        let characters = JSON.parse(data).characters;
+        const id = req.params.id;
+
+        const foundCharacter = characters.find((character) => character.id === id);
+
+        res.send(foundCharacter);
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
