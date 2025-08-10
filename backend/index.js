@@ -5,6 +5,11 @@ import fs from 'fs';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+function newId(characters) {
+    characters.sort((a, b) => a.id - b.id);
+    return characters[characters.length - 1].id + 1 ;
+}
+
 app.use(cors());
 app.use(express.json());
 
@@ -32,6 +37,22 @@ app.get('/characters/:id', (req, res) => {
         const foundCharacter = characters.find((character) => character.id === id);
 
         res.send(foundCharacter);
+    })
+})
+
+app.post('/characters', (req, res) => {
+    fs.readFile('./characters.json', 'utf8', (err, data) => {
+        if (err) {
+            res.send(err);
+        }
+        try {
+            let characters = JSON.parse(data).characters;
+            const {name, realName, universe} = req.body;
+
+
+        } catch (err){
+            res.status(500).send("Error writing characters.");
+        }
     })
 })
 
