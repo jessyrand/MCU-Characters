@@ -47,8 +47,22 @@ app.post('/characters', (req, res) => {
         }
         try {
             let characters = JSON.parse(data).characters;
-            const {name, realName, universe} = req.body;
 
+            const {name, realName, universe} = req.body;
+            if(!name || !realName || !universe) {
+                return res.status(400).send({error: 'Missing name, realName or universe'});
+            }
+
+            const id = newId(characters)
+            const newCharacter = {id, name, realName, universe}
+            characters.push(newCharacter);
+
+            fs.writeFile('./characters.json', JSON.stringify({ characters }), (err) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.status(201).send(newCharacter);
+            })
 
         } catch (err){
             res.status(500).send("Error writing characters.");
