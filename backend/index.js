@@ -83,6 +83,10 @@ app.put('/characters/:id', (req, res) => {
 
             const characterIndex = characters.findIndex((character) => character.id === paramsId);
 
+            if (characterIndex === -1) {
+                return res.status(404).send({ error: "Character not found" });
+            }
+
             if(!id || !name || !realName || !universe) {
                 return res.status(400).send({error: 'Missing id, name, realName or universe'});
             }
