@@ -17,4 +17,22 @@ export default function CharactersList() {
             });
     }, []);
 
+    return (
+        <div>
+            {characters.map((character, index) => (
+                <div key={index}>
+                    <div>
+                        <p>{character.id}</p>
+                        <h1>{character.name}</h1>
+                        <p>{character.realName}</p>
+                        <p>{character.universe}</p>
+                    </div>
+                    <div>
+                        <button>Update</button>
+                        <button>Delete</button>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
 }
