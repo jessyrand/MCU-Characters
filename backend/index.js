@@ -82,7 +82,7 @@ app.put('/characters/:id', (req, res) => {
             let characters = JSON.parse(data).characters;
             const {id, name, realName, universe} = req.body;
 
-            const paramsId = parseInt(req.params.id);
+            const paramsId = parseInt(req.params.id, 10);
 
             const characterIndex = characters.findIndex((character) => character.id === paramsId);
 
@@ -124,7 +124,7 @@ app.delete('/characters/:id', (req, res) => {
         }
         try {
             let characters = JSON.parse(data).characters;
-            const paramsId = parseInt(req.params.id);
+            const paramsId = parseInt(req.params.id, 10);
             const characterIndex = characters.findIndex((character) => character.id === paramsId);
 
             if (characterIndex === -1) {
