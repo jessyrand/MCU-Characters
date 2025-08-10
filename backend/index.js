@@ -12,6 +12,15 @@ app.get('/', (req, res) => {
     res.send('MCU Characters API running');
 });
 
+app.get('/characters', (req, res) => {
+    fs.readFile('./characters.json', 'utf8', (err, data) => {
+        if (err) {
+            res.send(err);
+        }
+        res.send(data);
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
