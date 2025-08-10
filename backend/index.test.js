@@ -1,11 +1,10 @@
-import request from 'supertest';
-import app from './index.js';
+const request = require('supertest');
+const app = require('./index.js');
 
 describe('GET /characters', () => {
-    it('should return all characters', async () => {
-        const response = await request(app).get('/characters');
-        expect(response.statusCode).toBe(200);
-        expect(response.body).toHaveProperty('characters');
-        expect(Array.isArray(response.body.characters)).toBe(true);
+    it('should return status 200 and characters array', async () => {
+        const res = await request(app).get('/characters');
+        expect(res.statusCode).toBe(200);
+        expect(Array.isArray(res.body.characters)).toBe(true);
     });
 });
