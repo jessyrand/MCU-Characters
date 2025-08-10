@@ -70,6 +70,46 @@ app.post('/characters', (req, res) => {
     })
 })
 
+app.put('/characters/:id', (req, res) => {
+    fs.readFile('./characters.json', 'utf8', (err, data) => {
+        if (err) {
+            res.send(err);
+        }
+        try {
+            let characters = JSON.parse(data).characters;
+            const {id, name, realName, universe} = req.body;
+
+            const paramsId = parseInt(req.params.id);
+
+            const characterIndex = characters.findIndex((character) => character.id === paramsId);
+
+            if(!id || !name || !realName || !universe) {
+                return res.status(400).send({error: 'Missing id, name, realName or universe'});
+            }
+
+            for(const character of characters) {
+                if (character.id === id &&  character.id !== paramsId) {
+                    return res.status(400).send({error: 'id must be unique'});
+                }
+            }
+
+            characters[characterIndex] = {id, name, realName, universe};
+
+            fs.writeFile('./characters.json', JSON.stringify({ characters }), (err) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.send(characters[characterIndex]);
+            })
+        }
+
+        catch(err){
+            res.status(500).send("Error writing characters.");
+        }
+
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
