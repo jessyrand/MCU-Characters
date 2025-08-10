@@ -1,6 +1,5 @@
 import './App.css'
 import CharactersList from "./components/CharactersList.jsx";
-import * as url from "node:url";
 
 function App() {
 
