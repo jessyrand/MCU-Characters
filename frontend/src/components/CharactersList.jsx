@@ -18,16 +18,16 @@ export default function CharactersList() {
     }, []);
 
     return (
-        <div>
+        <div className="flex gap-10 flex-wrap justify-center">
             {characters.map((character, index) => (
-                <div key={index}>
-                    <div>
-                        <p>{character.id}</p>
-                        <h1>{character.name}</h1>
+                <div key={index} className="w-1/4 bg-gray-300 rounded-lg p-5 flex justify-between">
+                    <div className="flex flex-col justify-center gap-2">
+                        <p className="text-red-600 font-bold">{character.id}</p>
+                        <h1 className="text-xl font-bold">{character.name}</h1>
                         <p>{character.realName}</p>
-                        <p>{character.universe}</p>
+                        <p className="text-blue-600">{character.universe}</p>
                     </div>
-                    <div>
+                    <div className="flex flex-col justify-center p-5 items-center gap-5">
                         <button>Update</button>
                         <button>Delete</button>
                     </div>
