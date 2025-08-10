@@ -110,6 +110,35 @@ app.put('/characters/:id', (req, res) => {
     })
 })
 
+app.delete('/characters/:id', (req, res) => {
+    fs.readFile('./characters.json', 'utf8', (err, data) => {
+        if (err) {
+            res.send(err);
+        }
+        try {
+            let characters = JSON.parse(data).characters;
+            const paramsId = parseInt(req.params.id);
+            const characterIndex = characters.findIndex((character) => character.id === paramsId);
+
+            if (characterIndex === -1) {
+                return res.status(404).send({ error: "Character not found" });
+            }
+
+            const [deletedCharacter] = characters.splice(characterIndex, 1);
+
+            fs.writeFile('./characters.json', JSON.stringify({ characters }), (err) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.send({message: 'Characters deleted successfully.', character: deletedCharacter});
+            })
+        }
+        catch (err) {
+            res.status(500).send("Error deleting character.");
+        }
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
