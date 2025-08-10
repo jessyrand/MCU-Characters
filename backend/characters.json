@@ -50,6 +50,12 @@
     },
     {
       "id": 9,
+      "name": "Thor Updated",
+      "realName": "Thor Odinson",
+      "universe": "Earth-616"
+    },
+    {
+      "id": 10,
       "name": "Thor",
       "realName": "Thor Odinson",
       "universe": "Earth-616"
