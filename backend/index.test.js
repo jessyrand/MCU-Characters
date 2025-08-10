@@ -95,3 +95,24 @@ describe('PUT /characters/:id', () => {
     });
 });
 
+describe('DELETE /characters/:id', () => {
+    it('should delete the character with id 9 (Thor updated) and return a success message', async () => {
+        const res = await request(app)
+            .delete('/characters/9');
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toHaveProperty('message');
+        expect(res.body.message).toMatch(/deleted successfully/i);
+        expect(res.body.character).toHaveProperty('id', 9);
+    });
+
+    it('should return 404 if character does not exist', async () => {
+        const res = await request(app)
+            .delete('/characters/9999');
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toHaveProperty('error');
+    });
+});
+
+
