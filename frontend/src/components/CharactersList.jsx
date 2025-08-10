@@ -20,8 +20,8 @@ export default function CharactersList() {
     return (
         <div className="flex gap-10 flex-wrap justify-center">
             {characters.map((character, index) => (
-                <div key={index} className="w-1/4 rounded-lg p-5 flex justify-between hover:scale-105 duration-500"
-                     style={{ backgroundColor: 'rgba(156, 163, 175, 0.8)' }}>
+                <div key={index} className="w-1/4 rounded-lg p-5 flex justify-between hover:scale-105 duration-500 shadow-black shadow-lg"
+                     style={{ backgroundColor: 'rgba(160, 160, 160, 0.8)' }}>
                     <div className="flex flex-col justify-center gap-2">
                         <p className="text-rose-900 font-bold">{character.id}</p>
                         <h1 className="text-xl font-bold">{character.name}</h1>
