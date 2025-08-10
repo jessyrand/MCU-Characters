@@ -1,6 +1,6 @@
-import express from 'express';
-import cors from 'cors';
-import fs from 'fs';
+const express = require('express');
+const cors = require('cors');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,7 +22,7 @@ app.get('/characters', (req, res) => {
         if (err) {
             res.send(err);
         }
-        res.send(data);
+        res.json(JSON.parse(data));
     })
 })
 
@@ -32,10 +32,13 @@ app.get('/characters/:id', (req, res) => {
             res.send(err);
         }
         let characters = JSON.parse(data).characters;
-        const id = req.params.id;
+        const id = parseInt(req.params.id, 10);
 
         const foundCharacter = characters.find((character) => character.id === id);
 
+        if (!foundCharacter) {
+            return res.status(404).send({ error: 'Character not found' });
+        }
         res.send(foundCharacter);
     })
 })
@@ -143,7 +146,7 @@ app.delete('/characters/:id', (req, res) => {
     })
 })
 
-export default app;
+module.exports = app;
 
 if (process.env.NODE_ENV !== 'test') {
     app.listen(PORT, () => {
