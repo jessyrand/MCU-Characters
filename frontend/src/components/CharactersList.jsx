@@ -5,6 +5,10 @@ const URL = "http://localhost:3000";
 
 export default function CharactersList() {
     const [characters, setCharacters] = useState([]);
+    const [editingCharacter, setEditingCharacter] = useState(null);
+    const handleCancelEdit = () => setEditingCharacter(null);
+
+
 
     useEffect(() => {
         axios.get(`${URL}/characters`)
