@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CharacterForm from "./CharacterForm.jsx";
+
 
 const URL = "http://localhost:3000";
 
@@ -7,6 +9,10 @@ export default function CharactersList() {
     const [characters, setCharacters] = useState([]);
     const [editingCharacter, setEditingCharacter] = useState(null);
     const handleCancelEdit = () => setEditingCharacter(null);
+    const handleAddOrUpdate = (character) => {
+        console.log("Add or Update:", character);
+    };
+
 
 
 
@@ -44,6 +50,12 @@ export default function CharactersList() {
                     </div>
                 </div>
             ))}
+            <CharacterForm
+                onAdd={handleAddOrUpdate}
+                editingCharacter={editingCharacter}
+                onCancel={handleCancelEdit}
+            />
+
         </div>
     )
 }
