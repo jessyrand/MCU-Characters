@@ -47,12 +47,6 @@
       "name": "Hulk",
       "realName": "Bruce Banner",
       "universe": "Earth-616"
-    },
-    {
-      "id": 9,
-      "name": "Spidey",
-      "realName": "Tony Parkour",
-      "universe": "Earth"
     }
   ]
 }

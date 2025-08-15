@@ -31,7 +31,8 @@ export default function CharacterForm({ onAdd, editingCharacter, onCancel }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 p-4 border rounded bg-white/80">
+        <form onSubmit={handleSubmit} className="flex gap-4 p-4 rounded-lg shadow-black shadow-lg"
+              style={{ backgroundColor: 'rgba(160, 160, 160, 0.8)' }}>
             {id !== null && (
                 <input
                     type="number"
@@ -63,11 +64,11 @@ export default function CharacterForm({ onAdd, editingCharacter, onCancel }) {
                 className="border p-2 rounded"
             />
             <div className="flex gap-2">
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+                <button type="submit" className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 cursor-pointer">
                     {id !== null ? "Update" : "Add"}
                 </button>
                 {id !== null && (
-                    <button type="button" onClick={onCancel} className="bg-gray-400 text-white p-2 rounded hover:bg-gray-500">
+                    <button type="button" onClick={onCancel} className="bg-gray-400 text-white p-2 rounded hover:bg-gray-500 cursor-pointer">
                         Cancel
                     </button>
                 )}
