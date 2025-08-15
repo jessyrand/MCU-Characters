@@ -9,8 +9,30 @@ export default function CharactersList() {
     const [characters, setCharacters] = useState([]);
     const [editingCharacter, setEditingCharacter] = useState(null);
     const handleCancelEdit = () => setEditingCharacter(null);
-    const handleAddOrUpdate = (character) => {
-        console.log("Add or Update:", character);
+    const handleAddOrUpdate = async (character) => {
+        if (character.id) {
+            await fetch(`${URL}/characters/${character.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(character)
+            });
+            setCharacters(characters.map(c => (c.id === character.id ? character : c)));
+        } else {
+            const res = await fetch(`${URL}/characters`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(character)
+            });
+            const newChar = await res.json();
+            setCharacters([...characters, newChar]);
+        }
+        setEditingCharacter(null);
+    };
+
+    const handleDelete = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this character?")) return;
+        await fetch(`${URL}/characters/${id}`, { method: "DELETE" });
+        setCharacters(characters.filter(c => c.id !== id));
     };
 
 
@@ -39,11 +61,11 @@ export default function CharactersList() {
                         <p className="text-cyan-950">{character.universe}</p>
                     </div>
                     <div className="flex flex-col justify-center p-5 items-center gap-5">
-                        <button className="border rounded-lg p-2 w-20 hover:bg-cyan-950
+                        <button onClick={() => setEditingCharacter(character)} className="border rounded-lg p-2 w-20 hover:bg-cyan-950
                         hover:text-white cursor-pointer duration-500">
                             Update
                         </button>
-                        <button className="border rounded-lg p-2 w-20 hover:bg-rose-900
+                        <button onClick={() => handleDelete(character.id)} className="border rounded-lg p-2 w-20 hover:bg-rose-900
                         hover:text-white cursor-pointer duration-500">
                             Delete
                         </button>

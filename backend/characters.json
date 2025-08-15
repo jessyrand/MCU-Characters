@@ -22,7 +22,7 @@
       "id": 4,
       "name": "Black Widow",
       "realName": "Natasha Romanoff",
-      "universe": "Earth-616"
+      "universe": "Earth"
     },
     {
       "id": 5,
@@ -47,6 +47,12 @@
       "name": "Hulk",
       "realName": "Bruce Banner",
       "universe": "Earth-616"
+    },
+    {
+      "id": 9,
+      "name": "Spidey",
+      "realName": "Tony Parkour",
+      "universe": "Earth"
     }
   ]
 }
