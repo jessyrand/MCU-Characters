@@ -13,3 +13,18 @@ The project is split into two parts:
 ```bash
 git clone https://github.com/yourusername/mcu-characters.git
 cd mcu-characters
+```
+
+### 2. Aller dans le dossier backend :  
+```bash
+cd backend
+npm install
+node index.js
+```
+
+### 3. Ouvrir un nouveau terminal et aller dans le dossier frontend :
+```bash
+cd frontend
+npm install
+npm run dev
+```
