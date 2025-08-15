@@ -1,4 +1,4 @@
-# MCU Characters - STD2404
+# MCU Characters - STD24004
 
 A simple application to manage a list of characters from the Marvel Cinematic Universe (MCU).  
 The project is split into two parts:
