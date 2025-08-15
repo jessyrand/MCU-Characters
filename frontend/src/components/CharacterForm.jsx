@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function CharacterForm({ onAdd }) {
+export default function CharacterForm({ onAdd, editingCharacter, onCancel }) {
     const [name, setName] = useState("");
     const [realName, setRealName] = useState("");
     const [universe, setUniverse] = useState("");
+    const [id, setId] = useState(null);
+
+    useEffect(() => {
+        if (editingCharacter) {
+            setId(editingCharacter.id);
+            setName(editingCharacter.name);
+            setRealName(editingCharacter.realName);
+            setUniverse(editingCharacter.universe);
+        } else {
+            setId(null);
+            setName("");
+            setRealName("");
+            setUniverse("");
+        }
+    }, [editingCharacter]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!name || !realName || !universe) return;
-        onAdd({ name, realName, universe });
+        onAdd({ id, name, realName, universe });
+        setId(null);
         setName("");
         setRealName("");
         setUniverse("");
@@ -16,6 +32,15 @@ export default function CharacterForm({ onAdd }) {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-2 p-4 border rounded bg-white/80">
+            {id !== null && (
+                <input
+                    type="number"
+                    placeholder="ID"
+                    value={id}
+                    onChange={(e) => setId(Number(e.target.value))}
+                    className="border p-2 rounded"
+                />
+            )}
             <input
                 type="text"
                 placeholder="Name"
@@ -37,9 +62,16 @@ export default function CharacterForm({ onAdd }) {
                 onChange={(e) => setUniverse(e.target.value)}
                 className="border p-2 rounded"
             />
-            <button type="submit" className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-                Add
-            </button>
+            <div className="flex gap-2">
+                <button type="submit" className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+                    {id !== null ? "Update" : "Add"}
+                </button>
+                {id !== null && (
+                    <button type="button" onClick={onCancel} className="bg-gray-400 text-white p-2 rounded hover:bg-gray-500">
+                        Cancel
+                    </button>
+                )}
+            </div>
         </form>
     );
 }
