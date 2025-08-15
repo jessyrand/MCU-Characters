@@ -15,16 +15,26 @@ git clone https://github.com/yourusername/mcu-characters.git
 cd mcu-characters
 ```
 
-### 2. Aller dans le dossier backend :  
+### 2. Move to backend directory :  
 ```bash
 cd backend
 npm install
 node index.js
 ```
 
-### 3. Ouvrir un nouveau terminal et aller dans le dossier frontend :
+### 3. Open a new terminal and move to frontend directory :
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
+
+## Features
+
+- Display a list of characters (id, name, real name, universe)
+- Add a new character
+- Update an existing character
+- Delete a character with confirmation
+- Reusable form for Add / Update
+- Pre-filled fields when updating a character
+- Cancel editing
